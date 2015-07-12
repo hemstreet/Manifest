@@ -1,0 +1,15 @@
+{
+  "name": "script",
+  "version": "1.0.0",
+  "description": "Javascript Boiler Plate",
+  "main": "script.js",
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "lodash": "latest",
+    "jquery": "latest",
+    "gulp" : "latest",
+    "gulp-livereload" : "latest",
+    "gulp-browserify" : "latest"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "underlay ": true,
+  "steps": {
+    "selector": ".content",
+    "text ": "To go do XYZ you can click here",
+    "animation": "blink"
+  }
+}
