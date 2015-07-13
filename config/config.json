@@ -1,5 +1,6 @@
 {
   "underlayClass": "manifest-underlay",
+  "startup" : false,
   "slides": [
     {
       "selector": ".btn-lg.btn-default",
