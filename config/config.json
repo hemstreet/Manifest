@@ -1,8 +1,15 @@
 {
-  "underlay ": true,
-  "steps": {
-    "selector": ".content",
-    "text ": "To go do XYZ you can click here",
-    "animation": "blink"
-  }
+  "underlayClass": "manifest-underlay",
+  "slides": [
+    {
+      "selector": ".btn-lg.btn-default",
+      "text ": "To go do XYZ you can click here",
+      "animation": "blink"
+    },
+    {
+      "selector": ".btn-lg.btn-default",
+      "text ": "To go do",
+      "animation": "blink"
+    }
+  ]
 }

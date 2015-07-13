@@ -8,7 +8,7 @@ gulp.task('dev', ['scripts'], function() { });
 // Compile scripts
 gulp.task('scripts', function() {
     // Single entry point to browserify
-    gulp.src('public/js/mainfest.js')
+    gulp.src('public/js/manifest.js')
         .pipe(browserify({
             insertGlobals : true,
             debug : !gulp.env.production
