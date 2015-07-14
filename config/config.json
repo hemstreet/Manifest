@@ -1,16 +1,16 @@
 {
   "underlayClass": "manifest-underlay",
-  "startup" : false,
+  "startup" : true,
   "slides": [
     {
       "selector": ".btn-lg.btn-default",
-      "text ": "To go do XYZ you can click here",
-      "animation": "blink"
+      "title": "Sign up",
+      "content": "First element"
     },
     {
-      "selector": ".btn-lg.btn-default",
-      "text ": "To go do",
-      "animation": "blink"
+      "selector": ".alert.alert-danger",
+      "title": "Other slider thing",
+      "content": "Halfway page check"
     }
   ]
 }

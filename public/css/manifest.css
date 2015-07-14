@@ -4,6 +4,9 @@
 .manifest-tutorial .manifest-active {
   position: relative;
   z-index: 3;
+  -webkit-animation: pulsate 1s ease-out;
+  -webkit-animation-iteration-count: 3;
+  opacity: 1;
 }
 .manifest-underlay {
   background: rgba(0, 0, 0, 0.5);
@@ -14,4 +17,24 @@
   bottom: 0;
   left: 0;
   display: none;
+}
+@-webkit-keyframes pulsate {
+  0% {
+    opacity: 0.0;
+  }
+  25% {
+    opacity: 1.0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.manifest-container {
+  background: #fff;
+  padding: 25px;
+  position: absolute;
+  z-index: 3;
 }
