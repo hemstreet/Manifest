@@ -46,7 +46,7 @@ var _ = require('lodash');
 
             $('[data-manifest="next"]').on('click', this.next.bind(this));
             $('[data-manifest="previous"]').on('click', this.previous.bind(this));
-            $('[data-manifest="end"]').on('click', this.endOfSlides);
+            $('[data-manifest="end"]').on('click', this.endOfSlides.bind(this));
 
         },
         next: function() {
@@ -140,6 +140,8 @@ var _ = require('lodash');
 
             $('body').addClass('manifest-end');
 
+
+            console.log(this);
             this.scrollToTopByAmount(0);
 
         },
