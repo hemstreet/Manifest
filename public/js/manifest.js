@@ -2,11 +2,14 @@ var _ = require('lodash');
 
 (function($) {
 
-    var obj = {
+    var manifest = {
         $underlay : null,
         currentIndex: 0,
         slides: [],
         $slideContentContainer: null,
+        $firstSlide: null,
+        $lastSlide: null,
+        $currentSlide: null,
 
         init: function(_config) {
 
@@ -14,38 +17,56 @@ var _ = require('lodash');
                 config = _.assign( json, _config),
                 $body = $('body');
 
+            if(json.startup === false) {
+                return false;
+            }
+
             this.slides = json.slides;
 
             this.$underlay = $('<div>').addClass(json.underlayClass)[0];
             $body.append(this.$underlay);
 
-            this.$slideContentContainer = $('<div class="manifest-container"><h3></h3><p></p><a href="#" data-manifest="previous">Previous</a><a href="#" data-manifest="next">Next</a></a></div>').addClass('manifest-container');
+            this.$slideContentContainer = $('<div class="manifest-container"><h3></h3><p></p><a href="#" data-manifest="previous">Previous</a><a href="#" data-manifest="next">Next</a><a href="#" data-manifest="end">End</a></div>');
             $body.append(this.$slideContentContainer);
 
-            if(json.startup === true) {
-                $body.addClass('manifest-tutorial');
-            }
+            $('[data-manifest]').on('click', function(e) {
+                e.preventDefault();
+            });
 
-            var $firstSlide = $(this.slides[0].selector);
-            $firstSlide.addClass('manifest-active');
-            this.currentIndex++;
+            $body.addClass('manifest-tutorial');
 
-            this.scrollTo($firstSlide);
+            this.$firstSlide = $(this.slides[0].selector);
+            this.$firstSlide.addClass('manifest-active');
+
+            this.$lastSlide = $(this.slides[this.slides.length - 1].selector);
+
+            this.scrollTo(this.$firstSlide);
 
             $('[data-manifest="next"]').on('click', this.next.bind(this));
             $('[data-manifest="previous"]').on('click', this.previous.bind(this));
+            $('[data-manifest="end"]').on('click', this.endOfSlides);
 
         },
         next: function() {
 
-            console.log('clicked next', this.slides.length, this.currentIndex);
-            if(this.slides.length > this.currentIndex) {
+            if(this.currentIndex < (this.slides.length - 1)) {
                 $(this.slides[this.currentIndex].selector).removeClass('manifest-active');
 
-                var $slide = $(this.slides[this.currentIndex++].selector);
+                if(this.currentIndex == 0) {
+                    $('body').removeClass('manifest-first');
+                }
+
+                this.currentIndex++;
+
+                var $slide = $(this.slides[this.currentIndex].selector);
+
                 $slide.addClass('manifest-active');
 
                 this.scrollTo($slide);
+
+                if(this.currentIndex == (this.slides.length - 1)) {
+                    $('body').addClass('manifest-last');
+                }
 
             }
             else
@@ -56,57 +77,75 @@ var _ = require('lodash');
         },
         previous: function() {
 
-            console.log('clicked previous', this.currentIndex);
             if(this.currentIndex > 0) {
+
+                if(this.currentIndex == (this.slides.length - 1)) {
+                    $('body').removeClass('manifest-last');
+                }
+
+                if(this.currentIndex -1 == 0) {
+                    $('body').addClass('manifest-first');
+                }
+
                 $(this.slides[this.currentIndex].selector).removeClass('manifest-active');
 
-                var $slide = $(this.slides[this.currentIndex--].selector);
+                this.currentIndex--;
+
+                var $slide = $(this.slides[this.currentIndex].selector);
                 $slide.addClass('manifest-active');
 
                 this.scrollTo($slide);
             }
             else
             {
-                this.endOfSlides();
+                this.beginningOfSlides();
             }
 
         },
         scrollTo : function($el) {
 
             var screenHeight = screen.height;
-            $('html, body').animate({
-                scrollTop: $el.offset().top - (screenHeight / 2)
-            }, 1000);
+            this.scrollToTopByAmount($el.offset().top - (screenHeight / 2));
+
+            this.$currentSlide = $el;
 
             this.updateSlideContent();
 
         },
+        scrollToTopByAmount: function(top) {
+            $('html, body').animate({
+                scrollTop: top
+            }, 1000);
+        },
         updateSlideContent: function() {
 
-            var index = this.currentIndex - 1,
-                data = this.slides[index],
-                $slide = $($(data.selector)[0]);
+            var data = this.slides[this.currentIndex];
 
-            $('h3', this.$slideContentContainer[0]).html(data.title);
-            $('p', this.$slideContentContainer[0]).html(data.content);
+            $('h3', this.$slideContentContainer[0]).html(data.content);
+            $('p', this.$slideContentContainer[0]).html(data.title);
 
             var css = {
-                top: $slide.position().top - this.$slideContentContainer.outerHeight(),
-                left: $slide.position().left
+                top: this.$currentSlide.position().top - this.$slideContentContainer.outerHeight(),
+                left: this.$currentSlide.position().left
             };
 
             this.$slideContentContainer.css(css);
 
         },
         endOfSlides: function() {
-            console.log('hit end of slides');
+
+            $('.manifest-active').removeClass('manifest-active');
+
+            $('body').addClass('manifest-end');
+
+            this.scrollToTopByAmount(0);
+
         },
         beginningOfSlides: function() {
-            console.log('beginning of slides');
+            $('body').addClass('manifest-start');
         }
     };
 
-    obj.init({});
-
+    manifest.init({});
 
 })(jQuery);

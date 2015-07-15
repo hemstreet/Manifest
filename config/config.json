@@ -11,6 +11,16 @@
       "selector": ".alert.alert-danger",
       "title": "Other slider thing",
       "content": "Halfway page check"
+    },
+    {
+      "selector": ".well",
+      "title": "Panel Default",
+      "content": "Test data about that panel"
+    },
+    {
+      "selector": "#carousel-example-generic",
+      "title": "Id's too!",
+      "content": "Slider demo targeting ID"
     }
   ]
 }

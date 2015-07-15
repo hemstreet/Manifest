@@ -38,3 +38,18 @@
   position: absolute;
   z-index: 3;
 }
+[data-manifest="end"] {
+  display: none;
+}
+.manifest-last [data-manifest="next"] {
+  display: none;
+}
+.manifest-last [data-manifest="end"] {
+  display: inline-block;
+}
+.manifest-first [data-manifest="previous"] {
+  display: none;
+}
+.manifest-end [class*="manifest-"] {
+  display: none;
+}
