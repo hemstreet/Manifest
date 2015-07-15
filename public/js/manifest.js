@@ -40,6 +40,8 @@ var _ = require('lodash');
 
             this.$lastSlide = $(this.slides[this.slides.length - 1].selector);
 
+            $body.addClass('manifest-first');
+
             this.scrollTo(this.$firstSlide);
 
             $('[data-manifest="next"]').on('click', this.next.bind(this));
