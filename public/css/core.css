@@ -51,15 +51,3 @@ a[data-manifest="end"] {
 .manifest-end [class*="manifest-"] {
   display: none;
 }
-.manifest-tutorial h3 {
-  margin-top: 0;
-}
-[data-manifest="previous"] {
-  margin-right: 15px;
-}
-.manifest-container {
-  background: #fff;
-  padding: 25px;
-  position: absolute;
-  z-index: 3;
-}

@@ -19,6 +19,8 @@ gulp.task('scripts', function() {
 gulp.task('watch', function() {
     livereload.listen();
     gulp.watch('public/js/*.js', ['scripts']);
+    gulp.watch('config/*.json', ['scripts']);
+    gulp.watch('public/css/*.css', ['scripts']);
 });
 
 gulp.task('default', ['dev', 'watch']);

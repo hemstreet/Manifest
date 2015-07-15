@@ -26,7 +26,7 @@ var _ = require('lodash');
             this.$underlay = $('<div>').addClass(json.underlayClass)[0];
             $body.append(this.$underlay);
 
-            this.$slideContentContainer = $('<div class="manifest-container"><h3></h3><p></p><a href="#" data-manifest="previous">Previous</a><a href="#" data-manifest="next">Next</a><a href="#" data-manifest="end">End</a></div>');
+            this.$slideContentContainer = (json.manifestTemplate) ? $(json.manifestTemplate) : $('<div class="manifest-container"><h3></h3><p></p><a href="#" data-manifest="previous">Previous</a><a href="#" data-manifest="next">Next</a><a href="#" data-manifest="end">End</a></div>');
             $body.append(this.$slideContentContainer);
 
             $('[data-manifest]').on('click', function(e) {
@@ -151,5 +151,6 @@ var _ = require('lodash');
     };
 
     manifest.init({});
+
 
 })(jQuery);

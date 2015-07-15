@@ -1,6 +1,7 @@
 {
   "underlayClass": "manifest-underlay",
   "startup" : true,
+  "manifestTemplate" : "<div class=\"manifest-container\"><h3></h3><p></p><a href=\"#\" data-manifest=\"previous\" class=\"btn btn-sm btn-primary\">Previous</a><a href=\"#\" data-manifest=\"next\" class=\"btn btn-sm btn-primary\">Next</a><a href=\"#\" data-manifest=\"end\" class=\"btn btn-sm btn-success\">End</a></div>",
   "slides": [
     {
       "selector": ".btn-lg.btn-default",
